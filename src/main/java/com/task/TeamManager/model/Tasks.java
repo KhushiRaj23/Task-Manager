@@ -1,7 +1,9 @@
 package com.task.TeamManager.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -44,36 +46,22 @@ public class Tasks {
     private TaskPriority priority=TaskPriority.MEDIUM;
 
 
-    @FutureOrPresent(message = "Due date must be today or in the future")
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id", nullable = false)
+    @JsonBackReference
     private Projects project;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assigned_to_id")
+    @JsonBackReference
     private Users assignedTo;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-}
-
-enum TaskStatus{
-    TODO,
-    IN_PROGRESS,
-    BLOCKED,
-    DONE,
-    ARCHIVED
-}
-
-enum TaskPriority {
-    LOW,
-    MEDIUM,
-    HIGH,
-    URGENT
 }

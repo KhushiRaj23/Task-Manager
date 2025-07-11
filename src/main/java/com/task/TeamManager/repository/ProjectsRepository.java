@@ -13,22 +13,35 @@ import java.util.List;
 
 @Repository
 public interface ProjectsRepository extends JpaRepository<Projects, Long> {
-    //finding projects by project manager
-    List<Projects> findByProjectManager(Users projectManager);
 
-    //getting all projects with pagination
+    /**
+     * Find projects assigned to a specific project manager.
+     */
+    List<Projects> findByProjectManagerId(Users projectManager);
+
+    /**
+     * Get all projects with pagination.
+     */
     Page<Projects> findAll(Pageable pageable);
 
-    //finding projects by name containing a string
+    /**
+     * Search projects by name (case-insensitive).
+     */
     List<Projects> findByNameContainingIgnoreCase(String name);
 
-    //counting active projects (not ended or end date is in the future)
-    @Query("SELECT COUNT(p) FROM projects p WHERE p.endDate IS NULL OR p.endDate > CURRENT_DATE")
-    long countActiveProjects();
+    /**
+     * Count active projects where the end date is either null or in the future.
+     */
+     @Query("SELECT COUNT(p) FROM projects p WHERE p.active = true")
+     long countActiveProjects();
 
-    //counting by end date null or end date after a given date
+    /**
+     * Count projects with endDate null or after the given date.
+     */
     long countByEndDateIsNullOrEndDateAfter(LocalDate date);
 
-    //finding all projects ordered by creation date
+    /**
+     * Get all projects ordered by creation timestamp in descending order.
+     */
     List<Projects> findAllByOrderByCreatedAtDesc();
 }

@@ -1,5 +1,7 @@
 package com.task.TeamManager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -44,14 +46,19 @@ public class Users{
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> roles=new HashSet<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JsonManagedReference
+    private Set<Roles> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "projectManager", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "projectManagerId", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Projects> managedProjects = new HashSet<>();
 
     @OneToMany(mappedBy = "assignedTo", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Tasks> assignedTasks = new HashSet<>();
 
 }
