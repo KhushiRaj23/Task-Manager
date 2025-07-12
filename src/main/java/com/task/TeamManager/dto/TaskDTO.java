@@ -19,4 +19,16 @@ public class TaskDTO {
         
         public Long projectId;
         public Long assignedToId;
+
+    public static TaskDTO fromEntity(com.task.TeamManager.model.Tasks task) {
+        TaskDTO dto = new TaskDTO();
+        dto.title = task.getTitle();
+        dto.description = task.getDescription();
+        dto.status = task.getStatus();
+        dto.taskPriority = task.getPriority();
+        if (task.getDueDate() != null) dto.dueDate = task.getDueDate().toLocalDate();
+        if (task.getProject() != null) dto.projectId = task.getProject().getId();
+        if (task.getAssignedTo() != null) dto.assignedToId = task.getAssignedTo().getId();
+        return dto;
+    }
 }

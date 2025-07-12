@@ -38,10 +38,13 @@ public interface ProjectsRepository extends JpaRepository<Projects, Long> {
     /**
      * Count projects with endDate null or after the given date.
      */
-    long countByEndDateIsNullOrEndDateAfter(LocalDate date);
+    long countByEndDateIsNullOrEndDateAfter(java.time.LocalDateTime date);
 
     /**
      * Get all projects ordered by creation timestamp in descending order.
      */
     List<Projects> findAllByOrderByCreatedAtDesc();
+
+    // Paginated recent projects
+    org.springframework.data.domain.Page<Projects> findAllByOrderByCreatedAtDesc(org.springframework.data.domain.Pageable pageable);
 }

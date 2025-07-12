@@ -34,6 +34,10 @@ public interface TasksRepository extends JpaRepository<Tasks, Long> {
     // 7. Count tasks due before or on a specific date
     long countByDueDateLessThanEqual(LocalDateTime dueDate);
 
+    // 7b. Count tasks due before or on a specific date and not completed
+    long countByDueDateLessThanEqualAndStatusNot(LocalDateTime dueDate, com.task.TeamManager.model.TaskStatus status);
+
     // 8. Find all tasks ordered by creation date (recent tasks first)
     Page<Tasks> findAllByOrderByCreatedAtDesc(Pageable pageable);
+
 }
