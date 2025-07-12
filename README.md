@@ -191,6 +191,14 @@ Response: {
 | GET    | `/api/dashboard/recent-projects` | Get recent projects |
 | GET    | `/api/dashboard/recent-tasks`    | Get recent tasks    |
 
+#### 🔐 ADashboard API Screenshots
+
+| Get dashboard stats                                                                        | Get recent tasks                                                                          |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| ![stat](https://github.com/user-attachments/assets/5c60a82f-1ff7-4b83-afc3-d33f38dce653)   | ![login](https://github.com/user-attachments/assets/f3254ffd-ad4d-4cb0-899a-ebdc7bdf931d) |
+
+
+
 ---
 
 ## 📦 Sample Payloads
