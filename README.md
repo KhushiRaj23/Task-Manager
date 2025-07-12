@@ -83,7 +83,7 @@ com.task.TeamManager
 ```http
 POST /api/auth/login
 {
-  "username": "john_doe",
+  "username": "khushi_raj",
   "password": "password123"
 }
 Response: {
